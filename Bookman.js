@@ -111,6 +111,7 @@ const styles = StyleSheet.create({
   header: {
     flex: 1,
     fontSize: 24,
+    fontFamily: 'helveticaneue-thin',
     alignSelf: 'center'
   }
 })

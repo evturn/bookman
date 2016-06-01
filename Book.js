@@ -9,17 +9,22 @@ import {
 class Book extends Component {
   render() {
     return (
-      <View style={styles.bookItem}>
-        <Text>
-          {this.props.title}
-        </Text>
+      <View style={styles.root}>
+        <Image
+          style={styles.img}
+          source={{ uri: this.props.coverURL }}
+        />
+        <View style={styles.info}>
+          <Text style={styles.author}>{this.props.author}</Text>
+          <Text style={styles.title}>{this.props.title}</Text>
+        </View>
       </View>
     )
   }
 }
 
 const styles = StyleSheet.create({
-  bookItem: {
+  root: {
     flex: 1,
     flexDirection: 'row',
     backgroundColor: '#FFFFFF',
@@ -27,7 +32,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 2,
     padding: 5
   },
-  cover: {
+  img: {
     flex: 1,
     height: 150,
     resizeMode: 'contain'
@@ -40,6 +45,7 @@ const styles = StyleSheet.create({
     padding: 20
   },
   author: {
+    fontFamily: 'helveticaneue-thin',
     fontSize: 18
   },
   title: {

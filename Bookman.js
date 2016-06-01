@@ -7,6 +7,11 @@ import {
   ListView
 } from 'react-native'
 
+const API = {
+  route: 'http://api.nytimes.com/svc/books/v3/lists/hardcover-fiction?response-format=json&api-key=',
+  key: 'd0f5a00abdc4458b88a7a7a234c50345' // STOP LOOKING AT MY KEY
+}
+
 class Bookman extends Component {
   constructor(props) {
     super(props)
@@ -17,6 +22,20 @@ class Bookman extends Component {
     this.state = {
       dataSource: dataSource.cloneWithRows([])
     }
+  }
+
+  componentDidMount() {
+    this.refreshData()
+  }
+
+  refreshData() {
+    fetch(`${API.route + API.key}`)
+      .then(x => x.json())
+      .then(x => {
+        this.setState({
+          dataSource: this.state.dataSource.cloneWithRows(x.results.books)
+        })
+      })
   }
 
   render() {

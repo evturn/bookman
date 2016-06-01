@@ -40,27 +40,42 @@ class Bookman extends Component {
   }
 
   renderRow(data) {
-    <Book
-      coverUrl={data.book_image}
-      title={data.title}
-      author={data.author}
-    />
+    return (
+      <Book
+        coverUrl={data.book_image}
+        title={data.title}
+        author={data.author}
+      />
+    )
+  }
+
+  renderHeader() {
+    return (
+      <View style={styles.divider}>
+        <Text style={styles.header}>
+          NYT Calls It 'Riveting'
+        </Text>
+      </View>
+    )
+  }
+
+  renderFooter() {
+    return(
+      <View style={styles.divider}>
+        <Text>That's it.</Text>
+      </View>
+    )
   }
 
   render() {
     return (
-      <View style={styles.container}>
-        <Text>
-          Bookman
-        </Text>
-        <Text>
-          Here's your goddamn list.
-        </Text>
-        <Text>
-          Don't like it?{'\n'}
-          👐hatever
-        </Text>
-      </View>
+      <ListView
+        style={{ marginTop: 25 }}
+        dataSource={this.state.dataSource}
+        renderRow={this.renderRow}
+        renderHeader={this.renderHeader}
+        renderFooter={this.renderFooter}
+      />
     )
   }
 }
@@ -88,12 +103,12 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#DDDDDD'
   },
-  sectionDivider: {
+  divider: {
     padding: 8,
     backgroundColor: '#EEEEEE',
     alignItems: 'center'
   },
-  headingText: {
+  header: {
     flex: 1,
     fontSize: 24,
     alignSelf: 'center'

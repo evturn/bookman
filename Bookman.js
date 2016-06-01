@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import {
-  AppRegistry,
   StyleSheet,
   Text,
   View,
   ListView
 } from 'react-native'
+import Book from './Book'
 
 const API = {
   route: 'http://api.nytimes.com/svc/books/v3/lists/hardcover-fiction?response-format=json&api-key=',
@@ -31,11 +31,20 @@ class Bookman extends Component {
   refreshData() {
     fetch(`${API.route + API.key}`)
       .then(x => x.json())
+      .then(x => x.results.books)
       .then(x => {
         this.setState({
-          dataSource: this.state.dataSource.cloneWithRows(x.results.books)
+          dataSource: this.state.dataSource.cloneWithRows(x)
         })
       })
+  }
+
+  renderRow(data) {
+    <Book
+      coverUrl={data.book_image}
+      title={data.title}
+      author={data.author}
+    />
   }
 
   render() {

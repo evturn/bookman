@@ -12,7 +12,7 @@ class Book extends Component {
       <View style={styles.root}>
         <Image
           style={styles.img}
-          source={{ uri: this.props.coverURL }}
+          source={{ uri: this.props.coverUrl }}
         />
         <View style={styles.info}>
           <Text style={styles.author}>{this.props.author}</Text>

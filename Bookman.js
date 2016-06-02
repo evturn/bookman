@@ -20,7 +20,8 @@ class Bookman extends Component {
     const dataSource = new ListView.DataSource({ rowHasChanged })
 
     this.state = {
-      dataSource: dataSource.cloneWithRows([])
+      dataSource: dataSource.cloneWithRows([]),
+      fetching: true
     }
   }
 
@@ -34,7 +35,8 @@ class Bookman extends Component {
       .then(x => x.results.books)
       .then(x => {
         this.setState({
-          dataSource: this.state.dataSource.cloneWithRows(x)
+          dataSource: this.state.dataSource.cloneWithRows(x),
+          fetching: false
         })
       })
   }
@@ -53,17 +55,19 @@ class Bookman extends Component {
     return (
       <View style={styles.divider}>
         <Text style={styles.header}>
-          NYT Calls It 'Riveting'
+          New York Times Best Sellers
         </Text>
       </View>
     )
   }
 
-  renderFooter() {
-    return(
-      <View style={styles.divider}>
+  renderFooter(fetching) {
+    return (
+      <View style={styles.divider}>{
+        fetching ?
+        <Text>Loading...</Text> :
         <Text>That's it.</Text>
-      </View>
+      }</View>
     )
   }
 
@@ -74,7 +78,7 @@ class Bookman extends Component {
         dataSource={this.state.dataSource}
         renderRow={this.renderRow}
         renderHeader={this.renderHeader}
-        renderFooter={this.renderFooter}
+        renderFooter={_ => this.renderFooter(this.state.fetching)}
       />
     )
   }
